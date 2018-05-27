@@ -9,10 +9,38 @@ import "rxjs/add/operator/map";
 export class PkmTcgService {
     private _basepath = "https://api.pokemontcg.io/v1/";
     
-    private _cardscache: ICards;
-    private _cardsquerry: string;
+    private _cardsCache: ICards;
+    private _cardsQuerry: string;
+    private _typesCache: ITypes;
     constructor(private _http: HttpClient) { }
 
+    getTypes(): Observable<ITypes> 
+    {
+        if(this._typesCache){
+            return Observable.of(this._typesCache);
+        }
+        else{
+            var url = this._basepath + "types";
+            return this._http.get<ITypes>(url)
+        
+        }
+        var card : ICard;
+    }
+
+    getCard(id : string): Observable<ICard> 
+    {
+        // do we have the card in our cache?
+        if(this._cardsCache){
+            var tmp = this._cardsCache.cards.find(card => card.id == id);
+            if(tmp){
+                return Observable.of(tmp);
+            }
+        }
+        else{
+            var url = this._basepath + "cards/" + id;
+            return this._http.get<ICard>(url)
+        }
+    }
     getCards(filters: string[]): Observable<ICards> {
         var url = this._basepath + "cards";
         if(filters && (filters.length > 0)){
@@ -26,11 +54,11 @@ export class PkmTcgService {
 
     getCardsUrl(url:string) : Observable<ICards>
     {
-        if(this._cardsquerry == url){
-            return Observable.of(this._cardscache);
+        if(this._cardsQuerry == url){
+            return Observable.of(this._cardsCache);
         }
         else{
-            this._cardsquerry = url;    //save last request as cache
+            this._cardsQuerry = url;    //save last request as cache
 
             var httpOptions = {
                 headers: new HttpHeaders({
@@ -60,9 +88,13 @@ export class PkmTcgService {
                     }
                     return out;
                     })    
-                .do(reply => this._cardscache = reply);
+                .do(reply => this._cardsCache = reply);
         }
     }
+}
+
+export interface ITypes{
+    types: string[];
 }
 
 export interface ICard{
@@ -70,6 +102,7 @@ export interface ICard{
     name: string;
     nationalPokedexNumber: number;
     imageUrl: string;
+    imageUrlHiRes: string;
     types: string[];
     supertype: string;
     subtype: string;

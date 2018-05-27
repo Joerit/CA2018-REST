@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CardsComponent } from './PKMTCG/Cards.component';
+import { CardDetailComponent } from './PKMTCG/CardDetail.component'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CardsComponent } from './PKMTCG/Cards.component';
     PageNotFoundComponent,
     NavBarComponent,
     CardsComponent,
+    CardDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { CardsComponent } from './PKMTCG/Cards.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'cards', pathMatch: 'full'},
       { path: 'cards', component: CardsComponent},
+      { path: 'cards/:id', component: CardDetailComponent},
       { path: "**", component: PageNotFoundComponent}
     ], { useHash: true }),
     FormsModule,

@@ -1,4 +1,4 @@
-<div class="card" *ngIf="Cards">
+<div class="card" *ngIf="Cards&&Types">
     <div class="card-header">Cards</div>
     <div class="container">
         filters:
@@ -12,17 +12,18 @@
                 <label for="id_guess">name: </label>
             </div>
             <div class="md-form">
-                <input #typef type="text" id="id_typef" class="form-control" mdbActive >
-                <label for="id_guess">type: </label>
+                    <select #typef class="form-control">
+                            <option *ngFor="let type of Types" value="{{type}}">{{type}}</option>
+                    </select>
             </div>
             </form>
     </div>
     <div class="text-center">
-            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value, pagesizef.value)">apply</button>
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value, pagesizef.value, typef.value)">apply</button>
     </div>
     <ul class="list-inline">
-        <li class="list-inline-item" *ngFor="let card of Cards.cards">
-            <a href=""><img src="{{card.imageUrl}}"></a>
+        <li *ngFor="let card of Cards.cards" class="list-inline-item">
+            <a [routerLink]="['/cards', card.id]"><img src="{{card.imageUrl}}"></a>
         </li> 
     </ul>
     <ul class="list-inline">

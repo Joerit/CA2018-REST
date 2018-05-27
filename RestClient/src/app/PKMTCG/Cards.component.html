@@ -1,5 +1,23 @@
 <div class="card" *ngIf="Cards">
     <div class="card-header">Cards</div>
+    <div class="container">
+        filters:
+        <form>
+            <div class="md-form">
+                <input #namef type="text" id="id_namef" class="form-control" mdbActive >
+                <label for="id_guess">name: </label>
+            </div>
+        </form>
+        <form>
+                <div class="md-form">
+                    <input #namef type="text" id="id_namef" class="form-control" mdbActive >
+                    <label for="id_guess">name: </label>
+                </div>
+            </form>
+    </div>
+    <div class="text-center">
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value)">apply</button>
+    </div>
     <div class="card-block">
         <table class="table table-hover">
             <thead>

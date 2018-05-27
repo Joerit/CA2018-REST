@@ -12,7 +12,15 @@ export class CardsComponent {
   constructor(private _svc : PkmTcgService) {}
 
   ngOnInit() {
-    this._svc.getCards(undefined)
+    this.getCards(undefined);
+  }
+
+  getCards(name: string){
+    var filters = [];
+    if(name && (name != "")){
+      filters.push("name=" + name);
+    }
+    this._svc.getCards(filters)
             .subscribe(result => this.Cards = result.cards);
   }
 }

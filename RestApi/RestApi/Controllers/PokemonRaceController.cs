@@ -40,10 +40,13 @@ namespace RestApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]PokemonRace race)
         {
-			ctx.Races.Add(race);
-			ctx.SaveChanges();
-			return Created("", race);
-        }
+			if (race != null) {
+				ctx.Races.Add(race);
+				ctx.SaveChanges();
+				return Created("", race);
+			}
+			else return NotFound();
+		}
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

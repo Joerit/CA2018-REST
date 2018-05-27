@@ -68,9 +68,14 @@ namespace RestApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+		public IActionResult Post([FromBody]Pokemon pokemon) {
+			if (pokemon != null) {
+				ctx.Pokemon.Add(pokemon);
+				ctx.SaveChanges();
+				return Created("", pokemon);
+			}
+			else return NotFound();
+		}
 
         // DELETE api/values/5
         [HttpDelete("{id}")]

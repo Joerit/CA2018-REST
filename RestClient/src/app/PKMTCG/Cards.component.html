@@ -4,36 +4,33 @@
         filters:
         <form>
             <div class="md-form">
+                <input #pagesizef type="number" id="id_pagesizef" class="form-control" value="20" mdbActive >
+                <label for="id_guess">page-size: </label>
+            </div>
+            <div class="md-form">
                 <input #namef type="text" id="id_namef" class="form-control" mdbActive >
                 <label for="id_guess">name: </label>
             </div>
-        </form>
-        <form>
-                <div class="md-form">
-                    <input #namef type="text" id="id_namef" class="form-control" mdbActive >
-                    <label for="id_guess">name: </label>
-                </div>
+            <div class="md-form">
+                <input #typef type="text" id="id_typef" class="form-control" mdbActive >
+                <label for="id_guess">type: </label>
+            </div>
             </form>
     </div>
     <div class="text-center">
-            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value)">apply</button>
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value, pagesizef.value)">apply</button>
     </div>
-    <div class="card-block">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>image</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let card of Cards">
-                    <td>{{card.id}}</td>
-                    <td>{{card.name}}</td>
-                    <td><img src="{{card.imageUrl}}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let card of Cards.cards">
+            <a href=""><img src="{{card.imageUrl}}"></a>
+        </li> 
+    </ul>
+    <ul class="list-inline">
+        <li class="list-inline-item text-center" *ngIf="Cards.prev">
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getPrev()">previous page</button>
+        </li>
+        <li class="list-inline-item text-center" *ngIf="Cards.next">
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getNext()">next page</button>
+        </li>
+    </ul>
   </div>

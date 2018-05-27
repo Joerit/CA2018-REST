@@ -42,7 +42,6 @@ namespace RestApi
             }
 
             app.UseMvc();
-
 			PokeDBInitializer.Initialize(pokeContext);
 
         }

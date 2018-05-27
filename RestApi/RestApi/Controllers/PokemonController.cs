@@ -20,15 +20,48 @@ namespace RestApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(ctx.Pokemon.ToList<Pokemon>());
-        }
+			string sort = Request.Query["sort"];
+			switch (sort) {
+				case "id":
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.OrderBy(pkm => pkm.Id)
+						.ToList());
+				case "name":
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.OrderBy(pkm => pkm.Name)
+						.ToList());
+				case "race":
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.OrderBy(pkm => pkm.Race)
+						.ToList());
+				case "type":
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.OrderBy(pkm => pkm.Race.Type)
+						.ToList());
+				case "hp":
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.OrderBy(pkm => pkm.Hp)
+						.ToList());
+				default:
+					return Json(ctx.Pokemon
+						.Include(pkm => pkm.Race.Type)
+						.ToList());
+			}
+			
+		}
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return Json(ctx.Pokemon
-				.Include(pkm => pkm.Race.)
-				.Where(x => x.Id == id));
+				.Where(x => x.Id == id)
+				.Include(pkm => pkm.Race.Type)
+				.ToList());
         }
 
         // POST api/values

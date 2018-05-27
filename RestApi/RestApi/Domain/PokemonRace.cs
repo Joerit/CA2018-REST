@@ -9,6 +9,6 @@ namespace RestApi.Domain
     {
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public PokemonType[] Type { get; set; }
+		public ICollection<string> Type { get; set; }
 	}
 }

@@ -12,55 +12,34 @@ namespace RestApi.Domain
 			context.Database.EnsureCreated();
 
 			if (!context.Pokemon.Any()) {
-				// add types
-				PokemonType fire = new PokemonType() {
-					Name = "Fire"
-				};
-				context.Types.Add(fire);
-
-				PokemonType grass = new PokemonType() {
-					Name = "Grass"
-				};
-				context.Types.Add(grass);
-
-				PokemonType water = new PokemonType() {
-					Name = "Water"
-				};
-				context.Types.Add(water);
-				PokemonType electric = new PokemonType() {
-					Name = "Electric"
-				};
-				context.Types.Add(electric);
-
-				// add races
+								// add races
 				PokemonRace bulbasaur = new PokemonRace() {
 					Name = "Bulbasaur",
-					TypeA = grass,
-					TypeB = null
+					Type = new List<string> { "grass" }
 				};
 				context.Races.Add(bulbasaur);
 
 				PokemonRace squirtle = new PokemonRace() {
 					Name = "Squirtle",
-					Type = new PokemonType[] { water }
+					Type = new List<string> { "water" }
 				};
 				context.Races.Add(squirtle);
 
 				PokemonRace charmander = new PokemonRace() {
 					Name = "Charmander",
-					Type = new PokemonType[] { fire }
+					Type = new List<string> { "fire" }
 				};
 				context.Races.Add(charmander);
 
 				PokemonRace pikachu = new PokemonRace() {
 					Name = "Pikachu",
-					Type = new PokemonType[] { electric }
+					Type = new List<string> { "electric" }
 				};
 				context.Races.Add(pikachu);
 
 				PokemonRace ludicolo = new PokemonRace() {
 					Name = "Ludicolo",
-					Type = new PokemonType[] { water, grass }
+					Type = new List<string> { "water", "grass" }
 				};
 				context.Races.Add(ludicolo);
 

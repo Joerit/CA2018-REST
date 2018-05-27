@@ -9,6 +9,7 @@ namespace RestApi.Domain
     {
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public ICollection<string> Type { get; set; }
+		public string TypeA { get; set; }
+		public string TypeB { get; set; }
 	}
 }

@@ -15,31 +15,36 @@ namespace RestApi.Domain
 								// add races
 				PokemonRace bulbasaur = new PokemonRace() {
 					Name = "Bulbasaur",
-					Type = new List<string> { "grass" }
+					TypeA = "grass",
+					TypeB = ""
 				};
 				context.Races.Add(bulbasaur);
 
 				PokemonRace squirtle = new PokemonRace() {
 					Name = "Squirtle",
-					Type = new List<string> { "water" }
+					TypeA = "water",
+					TypeB = ""
 				};
 				context.Races.Add(squirtle);
 
 				PokemonRace charmander = new PokemonRace() {
 					Name = "Charmander",
-					Type = new List<string> { "fire" }
+					TypeA = "fire",
+					TypeB = ""
 				};
 				context.Races.Add(charmander);
 
 				PokemonRace pikachu = new PokemonRace() {
 					Name = "Pikachu",
-					Type = new List<string> { "electric" }
+					TypeA = "electric",
+					TypeB = ""
 				};
 				context.Races.Add(pikachu);
 
 				PokemonRace ludicolo = new PokemonRace() {
 					Name = "Ludicolo",
-					Type = new List<string> { "water", "grass" }
+					TypeA = "water",
+					TypeB = "grass"
 				};
 				context.Races.Add(ludicolo);
 

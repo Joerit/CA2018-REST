@@ -14,7 +14,5 @@ namespace RestApi.Domain
 		public DbSet<Pokemon> Pokemon { get; set; }
 
 		public DbSet<PokemonRace> Races { get; set; }
-
-		public DbSet<PokemonType> Types { get; set; }
     }
 }

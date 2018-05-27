@@ -8,7 +8,7 @@ using RestApi.Domain;
 
 namespace RestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Pokemon")]
     public class PokemonController : Controller
     {
 		private readonly PokemonContext ctx;
@@ -24,55 +24,51 @@ namespace RestApi.Controllers
 			switch (sort) {
 				case "id":
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
 						.OrderBy(pkm => pkm.Id)
 						.ToList());
 				case "name":
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
 						.OrderBy(pkm => pkm.Name)
 						.ToList());
 				case "race":
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
 						.OrderBy(pkm => pkm.Race)
 						.ToList());
 				case "type":
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
-						.OrderBy(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
+						.OrderBy(pkm => pkm.Race.TypeA + pkm.Race.TypeB)
 						.ToList());
 				case "hp":
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
 						.OrderBy(pkm => pkm.Hp)
 						.ToList());
 				default:
 					return Json(ctx.Pokemon
-						.Include(pkm => pkm.Race.Type)
+						.Include(pkm => pkm.Race)
 						.ToList());
 			}
-			
 		}
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Json(ctx.Pokemon
+            List<Pokemon> reply = ctx.Pokemon
 				.Where(x => x.Id == id)
-				.Include(pkm => pkm.Race.Type)
-				.ToList());
-        }
+				.Include(pkm => pkm.Race)
+				.ToList();
+
+			if (reply.Count > 0) return Json(reply);
+			else return NotFound();
+		}
 
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
         {
         }
 

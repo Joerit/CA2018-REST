@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApi.Domain;
@@ -9,7 +10,8 @@ using RestApi.Domain;
 namespace RestApi.Controllers
 {
     [Route("api/Pokemon")]
-    public class PokemonController : Controller
+	[EnableCors("AllowAll")]
+	public class PokemonController : Controller
     {
 		private readonly PokemonContext ctx;
 

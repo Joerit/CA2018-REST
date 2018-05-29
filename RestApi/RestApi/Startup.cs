@@ -31,8 +31,15 @@ namespace RestApi
 					Configuration.GetConnectionString("DefaultConnection")
 				)
 			);
-			services.AddCors();
-        }
+			services.AddCors(options =>
+			{
+				options.AddPolicy("AllowAll",
+					builder => builder
+								.AllowAnyHeader()
+								.AllowAnyMethod()
+								.AllowAnyOrigin());
+			});
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, PokemonContext pokeContext)
@@ -42,8 +49,12 @@ namespace RestApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
-			app.UseCors(builder => builder.AllowAnyHeader());
+			app.UseCors(builder => builder
+							.WithOrigins("http://localhost")
+							.AllowAnyHeader());
+
+			app.UseMvc();
+			
 			PokeDBInitializer.Initialize(pokeContext);
 
         }

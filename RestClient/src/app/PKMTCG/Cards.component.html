@@ -16,10 +16,15 @@
                             <option *ngFor="let type of Types" value="{{type}}">{{type}}</option>
                     </select>
             </div>
+            <div class="md-form">
+                <select #setf class="form-control">
+                        <option *ngFor="let set of Sets" value="{{set.code}}">{{set.name}}</option>
+                </select>
+        </div>
             </form>
     </div>
     <div class="text-center">
-            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value, pagesizef.value, typef.value)">apply</button>
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getCards(namef.value, pagesizef.value, typef.value, setf.value)">apply</button>
     </div>
     <ul class="list-inline">
         <li *ngFor="let card of Cards.cards" class="list-inline-item">

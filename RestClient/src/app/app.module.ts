@@ -11,6 +11,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CardsComponent } from './PKMTCG/Cards.component';
 import { CardDetailComponent } from './PKMTCG/CardDetail.component'
+import { LocalPokemonService } from './services/LocalPokemon.service'
+import { LocalPokemonComponent } from './LocalPokemon/Localpokemon.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { CardDetailComponent } from './PKMTCG/CardDetail.component'
     PageNotFoundComponent,
     NavBarComponent,
     CardsComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    LocalPokemonComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +31,7 @@ import { CardDetailComponent } from './PKMTCG/CardDetail.component'
       { path: '', redirectTo: 'cards', pathMatch: 'full'},
       { path: 'cards', component: CardsComponent},
       { path: 'cards/:id', component: CardDetailComponent},
+      { path: 'localpokemon', component: LocalPokemonComponent},
       { path: "**", component: PageNotFoundComponent}
     ], { useHash: true }),
     FormsModule,
@@ -35,7 +39,8 @@ import { CardDetailComponent } from './PKMTCG/CardDetail.component'
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
-    PkmTcgService
+    PkmTcgService,
+    LocalPokemonService
   ],
   bootstrap: [AppComponent]
 })

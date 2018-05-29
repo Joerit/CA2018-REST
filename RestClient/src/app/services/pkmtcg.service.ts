@@ -12,6 +12,7 @@ export class PkmTcgService {
     private _cardsCache: ICards;
     private _cardsQuerry: string;
     private _typesCache: ITypes;
+    private _setsCache: ISets;
     constructor(private _http: HttpClient) { }
 
     getTypes(): Observable<ITypes> 
@@ -24,7 +25,18 @@ export class PkmTcgService {
             return this._http.get<ITypes>(url)
         
         }
-        var card : ICard;
+    }
+
+    getSets(): Observable<ISets> 
+    {
+        if(this._setsCache){
+            return Observable.of(this._setsCache);
+        }
+        else{
+            var url = this._basepath + "sets";
+            return this._http.get<ISets>(url)
+        
+        }
     }
 
     getCard(id : string): Observable<ICard> 
@@ -95,6 +107,15 @@ export class PkmTcgService {
 
 export interface ITypes{
     types: string[];
+}
+
+export interface ISet{
+    code: string;
+    name: string;
+}
+
+export interface ISets{
+    sets: ISet[]
 }
 
 export interface ICard{

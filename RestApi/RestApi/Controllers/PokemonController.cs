@@ -81,8 +81,15 @@ namespace RestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-        }
+			Pokemon pokemon = ctx.Pokemon.Find(id);
+
+			if (pokemon != null) {
+				ctx.Pokemon.Remove(pokemon);
+				return Ok();
+			}
+			else return NotFound();
+		}
     }
 }

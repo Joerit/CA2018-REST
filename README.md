@@ -17,3 +17,8 @@ by joeri temmerman
 ## API
 
 - Controllers: 
+	- PokemonController
+		filtering
+	- PokemonRaceController
+
+- local MSSQLDB: PokemonDB

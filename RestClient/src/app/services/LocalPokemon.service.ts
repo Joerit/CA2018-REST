@@ -17,23 +17,34 @@ export class LocalPokemonService {
         return this._http.get<ILRace[]>(url)
     }
 
-    getPokemons(): Observable<ILPokemon> 
+    getPokemons(filters: string[]): Observable<ILPokemon[]> 
     {
         var url = this._basepath + "pokemon";
-        return this._http.get<ILPokemon>(url)
+        if(filters && (filters.length > 0)){
+            url = url + "?" + filters[0];
+            for (let index = 1; index < filters.length; index++){
+                url = url + "&" + filters[index];
+            }
+        }
+        return this._http.get<ILPokemon[]>(url);
+    }
+
+    setPokemon(name, lvl, hp, race, typea, typeb){
+        var poke : ILPokemon = {Name: name, Lvl: lvl, Hp: hp, Race: {Name: race, TypeA : typea, TypeB: typeb}};
+        this._http.post(this._basepath + "pokemon", poke)
     }
 }
 
 export interface ILRace{
-    Id: number;
     Name: string;
     TypeA: string;
     TypeB: string;
 }
 
 export interface ILPokemon{
-    Id: number;
     Name: string;
+    Lvl: number;
+    Hp: number;
     Race: ILRace;
 }
 

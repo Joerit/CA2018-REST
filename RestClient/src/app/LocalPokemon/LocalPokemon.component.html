@@ -1,7 +1,54 @@
 <div class="card" *ngIf="Pokemon">
+    <div class="card-header">Pokemons</div>
+    <div class="container">
+        filters:
+        <form>
+            <div class="md-form">
+                <input #pagesizef type="number" id="id_pagesizef" class="form-control" value="2" mdbActive >
+                <label for="id_pagesizef">page-size: </label>
+            </div>
+            <div class="md-form">
+                <input #pagef type="number" id="id_pagef" class="form-control" value="0" mdbActive >
+                <label for="id_pagef">page: </label>
+            </div>
+            <div class="md-form">
+                <input #ntypef type="text" id="id_typef" class="form-control" mdbActive >
+                <label for="id_typef">type: </label>
+            </div>
+        </form>
+    </div>
+    <div class="text-center">
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="getPokemons(pagesizef.value, pagef.value, typef.value)">apply</button>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-default waves-light" mdbRippleRadius (click)="getPokemonsSort(1)">sort by name</button>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-default waves-light" mdbRippleRadius (click)="getPokemonsSort(0)">sort by hp</button>
+    </div>
     <ul class="list">
         <li *ngFor="let pokemon of Pokemon" class="list-item">
-            {{pokemon.Name}}
+            <div>{{pokemon.name}}, hp: {{pokemon.hp}}</div>
         </li> 
     </ul>
-</div>
+    <div class="container">
+        add a pokemon:
+        <form>
+            <input #innamef type="text" id="id_innamef" class="form-control" value="" mdbActive >
+            <label for="id_innamef">name: </label>
+            <input #inlnlf type="number" id="id_inlnlf" class="form-control" value="" mdbActive >
+            <label for="id_inlnlf">level: </label>
+            <input #inhpf type="number" id="id_inhpf" class="form-control" value="" mdbActive >
+            <label for="id_inhpf">hp: </label>
+            <input #inracenamef type="text" id="id_inracenamef" class="form-control" value="" mdbActive >
+            <label for="id_inracenamef">racename: </label>
+            <input #intypeaf type="text" id="id_intypeaf" class="form-control" value="" mdbActive >
+            <label for="id_intypeaf">type A: </label>
+            <input #intypebf type="text" id="id_intypeBf" class="form-control" value="" mdbActive >
+            <label for="id_intypebf">type B: </label> 
+        </form>
+        <div class="text-center">
+            <button class="btn btn-default waves-light" mdbRippleRadius (click)="setPokemon(innamef.value, inlvlf.value, inhpf.value, inracenamef.value, intypeaf.value, intypebf.value)">add</button>
+    </div>
+    </div>
+  </div>

@@ -18,7 +18,9 @@ by joeri temmerman
 
 - Controllers: 
 	- PokemonController
-		filtering
+		filtering by race and type
+		sorting by id, name, race, type, hp
+		paging
 	- PokemonRaceController
 
 - local MSSQLDB: PokemonDB
